@@ -55,7 +55,7 @@
 										<form method="post" action="#">
 											<div class="field half">
 												<label for="ip">IP</label>
-												<input type="text" name="ip" id="ip" value="ws://140.116.82.42"/>
+												<input type="text" name="ip" id="ip" value="ws://140.116.82.42:9001"/>
 											</div>
 											<div class="field half">
 												<label for="topic">Topic</label>
@@ -70,9 +70,10 @@
 												<div id=rec></div>
 											</div>
 											<ul class="actions">
-												<li><input type="submit" value="Connect" class="button special" /></li>
-												<li><input type="submit" value="Send Message"  /></li>
-												
+												<!--li><input type="submit" value="Connect" class="button special" /></li>
+												<li><input type="submit" value="Send Message"  /></li-->
+												<button type="button" onclick="connect()">Connect</button>
+												<button type="button" onclick="publish()">Publish</button>
 											</ul>
 										</form>
 									</div>
