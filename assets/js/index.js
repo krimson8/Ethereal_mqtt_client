@@ -28,13 +28,13 @@ var row3 = "";
 var main = document.querySelector('#rec');
 main.innerHTML = row1 + "<br>" + row2 + "<br>" + row3 + "<br>";
 
-//var txt = document.querySelector('.textfield')
-//txt.value = ""
-//going to add button event
+var temp = document.querySelector('#temp');
+var humid = document.querySelector('#humid');
+var index_temp = 0;
+var index_humid = 0;
 
 var client = mqtt.connect(IP); // you add a ws:// url here
 client.subscribe("mqtt/demo");
-
 
 client.on("message", 
 	function(topic, payload) 
@@ -42,6 +42,12 @@ client.on("message",
 		row1 = row2;
 		row2 = row3;
 		row3 = payload.toString();
+
+		index_temp = row3.indexOf("Temperature");
+		index_humid = row3.indexOf("Humidity");
+
+		temp.value = row3.slice( index_temp + 12, index_temp + 18 );
+		humid.value = row3.slice( index_humid + 9, index_humid + 14 )
 		//console.log( payload.toString() );
 		main.innerHTML = row1 + "<br>" + row2 + "<br>" + row3 + "<br>";
 		//txt.value = payload.toString();
@@ -49,15 +55,8 @@ client.on("message",
 		  
 	}
 );
-var i ;
 
 /*
-for( i = 0 ; i < 3 ; i++ )
-{
-	client.publish( "mqtt/demo", "hello world! " + "lol" + i );
-}
-
-
 setTimeout(
 	function()
 	{
