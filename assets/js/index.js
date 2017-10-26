@@ -1,9 +1,6 @@
 
 var ip_show = document.querySelector('#ip');
-IP = ip_show.value;
-
 var topic_show = document.querySelector('#topic');
-topic = topic_show.value;
 
 var row1 = "";
 var row2 = "";
@@ -17,8 +14,14 @@ var index_temp = 0;
 var index_humid = 0;
 var client;
 
+var IP;
+var topic;
+
 function connect()
 {
+	IP = ip_show.value;
+	topic = topic_show.value;
+	
 	client = mqtt.connect(IP); 
 	client.subscribe(topic);
 	
