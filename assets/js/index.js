@@ -34,9 +34,17 @@ function connect()
 
 			index_temp = row3.indexOf("Temperature");
 			index_humid = row3.indexOf("Humidity");
+			index_light = row3.indexOf("Light");
+			index_uv = row3.indexOf("UV");
+			index_soil = row3.indexOf("Soil");
+			index_press = row3.indexOf("Pressure");
 
-			temp.value = row3.slice( index_temp + 12, index_temp + 18 );
+			temp.value = row3.slice( index_temp + 12, index_temp + 17 );
 			humid.value = row3.slice( index_humid + 9, index_humid + 14 )
+			light.value = row3.slice( index_light + 6, index_light + 9 )
+			uv.value = row3.slice( index_uv + 3, index_uv + 6 )
+			soil.value = row3.slice( index_soil + 5, index_soil + 10 )
+			press.value = row3.slice( index_press + 9, index_press + 16 )
 			//console.log( payload.toString() );
 			main.innerHTML = row1 + "<br>" + row2 + "<br>" + row3 + "<br>";
 			//txt.value = payload.toString();
