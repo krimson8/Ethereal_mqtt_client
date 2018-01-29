@@ -1,177 +1,153 @@
-<!DOCTYPE HTML>
-<!--
-	Ethereal by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Ethereal by HTML5 UP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body>
+<!DOCTYPE html>
+<html lang="en">
 
-		<!-- Page Wrapper -->
-			<div id="page-wrapper">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <style>
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 
-				<!-- Wrapper -->
-					<div id="wrapper">
+        .row.content {
+            height: auto;
+        }
 
-						<!-- Panel (Banner) -->
-							<section class="panel banner right">
-								<div class="content color0 span-3-75">
-									<h1 class="major">您好<br />
-									歡迎使用本農業系統</h1>
-									<p>本農業系統基於 <strong>MQTT 協定</strong>, 提供以下功能：<br />
-										<ul>
-											<li>實時監控</li>
-											<li>設備操作</li>
-											<li>數據分析</li>
-										</ul> 
-									</p>
-								</div>
-								<div class="image filtered span-1-75" data-position="25% 25%">
-									<img src="images/pic01.jpg" alt="" />
-								</div>
-							</section>
+        /* Set gray background color and 100% height */
 
-						<!-- Panel (Spotlight) -->
-							
-						<!-- Panel -->
-							<section class="panel color4-alt">
-								<div class="intro color4">
-									<h2 class="major">使用方式</h2>
-									<ul>
-										<li>1.先輸入IP<br /> ip 格式：<br/>"ws://140.116.82.42:9001"</li>
-										<li>2.輸入欲訂閲的頻道</li>
-										<li>3.開始收内容</li>
-									</ul> 
-								</div>
-								<div class="inner columns divided">
-									<div class="span-3-25">
-										<form method="post" action="#">
-											<div class="field half">
-												<label for="ip">IP</label>
-												<input type="text" name="ip" id="ip" value="ws://140.116.82.42:9001"/>
-											</div>
-											<div class="field half">
-												<label for="topic">Topic</label>
-												<input type="text" name="topic" id="topic" value="mqtt/demo"/>
-											</div>
-											<div class="field">
-												<label for="message">Message</label>
-												<textarea name="message" id="message" rows="1"></textarea>
-											</div>
-											<div class="field">
-												<label for="received">Received Message</label>
-												<div id=rec></div>
-											</div>
-											<ul class="actions">
-												<!--li><input type="submit" value="Connect" class="button special" /></li>
-												<li><input type="submit" value="Send Message"  /></li-->
-												<button type="button" onclick="connect()">Connect</button>
-												<button type="button" onclick="publish()">Publish</button>
-											</ul>
-										</form>
-									</div>
-									
-								</div>
-							</section>
+        .sidenav {
+            background-color: #f1f1f1;
+            height: 100%;
+        }
 
-						<!-- Panel -->
-							<section class="panel color2-alt">
-								
-								<div class="inner columns aligned">
-									<div class="span-4-5">
-										<h3 class="major">Information</h3>
-										<form method="post" action="#">
+        /* On small screens, set height to 'auto' for the grid */
 
-											<div class="field third">
-												<label for="demo-category">Module</label>
-												<div class="select-wrapper">
-													<select name="module-id" id="module-id">
-														<option value="">-</option>
-														<option value="1">001</option>
-														<option value="1">002</option>
-														<option value="1">003</option>
-														<option value="1">004</option>
-													</select>
-												</div>
-											</div>
-				
-											<div class="field third">
-												<label for="temp">Temperature</label>
-												<input type="text" name="temp" id="temp" value="" />
-											</div>
+        @media screen and (max-width: 767px) {
+            .row.content {
+                height: auto;
+            }
+        }
+    </style>
+</head>
 
-											<div class="field third">
-												<label for="humid">Humidity</label>
-												<input type="text" name="humid" id="humid" value="" />
-											</div>
+<body>    
+    <nav class="navbar navbar-inverse visible-xs">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Logo</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <button type="button" onclick="connect()">Connect</button>
+                    <button type="button" onclick="publish()">Publish</button>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-											<div class="field third">
-												<label for="light">Light</label>
-												<input type="text" name="light" id="light" value="" />
-											</div>
+    <div class="container-fluid">
+        <div class="row content">
+            <div class="col-sm-3 sidenav hidden-xs">
+                <h2>Logo</h2>
+                <ul class="nav nav-pills nav-stacked">
+                    <button type="button" onclick="connect()">Connect</button>
+                    <button type="button" onclick="publish()">Publish</button>
+                </ul>
+                <br>
+                <div class="well">
+                    <label for="ip">IP</label><br />
+                    <input type="text" name="ip" id="ip" value="ws://140.116.82.42:9001"/>
+                </div>
+                <div class="well">
+                    <label for="topic">Topic</label><br />
+                    <input type="text" name="topic" id="topic" value="mqtt/demo"/>
+                </div>
+                <div class="well">
+                    <label for="message">Message</label><br />
+                    <textarea name="message" id="message" rows="1"></textarea>
+                </div>
+                <div class="well">
+                    <label for="received">Received Message</label><br />
+                    <div id=rec></div>
+                </div>
+            </div>
+            <br>
 
-											<div class="field third">
-												<label for="uv">UV</label>
-												<input type="text" name="uv" id="uv" value="" />
-											</div>
+            <div class="col-sm-9">
+                <div class="well">
+                    <h4>Module</h4>
+                    <select name="module-id" id="module-id">
+                        <option value="">-</option>
+                        <option value="1">001</option>
+                        <option value="2">002</option>
+                        <option value="3">003</option>
+                        <option value="4">004</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <label for="temp">Temperature</label><br />
+                            <input type="text" name="temp" id="temp" value="" />
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <label for="humid">Humidity</label><br />
+                            <input type="text" name="humid" id="humid" value="" />
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <label for="light">Light</label><br />
+                            <input type="text" name="light" id="light" value="" />
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="well">
+                            <label for="uv">UV</label><br />
+                            <input type="text" name="uv" id="uv" value="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <label for="soil">Soil</label><br />
+                            <input type="text" name="soil" id="soil" value="" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <label for="press">Pressure</label><br />
+                            <input type="text" name="press" id="press" value="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="well">
+                            <label for="status">Status</label><br />
+                            <input type="text" name="stime" id="stime" value="" maxlength="35" size="35"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/browserMqtt.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/index.js"></script>
+</body>
 
-											<div class="field third">
-												<label for="soil">Soil</label>
-												<input type="text" name="soil" id="soil" value="" />
-											</div>
-
-											<div class="field third">
-												<label for="press">Pressure</label>
-												<input type="text" name="press" id="press" value="" />
-											</div>
-
-											<div class="field third">
-												<label for="status">Status</label>
-												<input type="text" name="status" id="status" value="" />
-											</div>
-											
-											<div class="field third">
-												<label for="status">Status</label>
-												<input type="text" name="status" id="status" value="" />
-											</div>
-
-											<div class="field third">
-												<label for="status">Status</label>
-												<input type="text" name="status" id="status" value="" />
-											</div>
-
-											<div class="field third">
-												<label for="status">Status</label>
-												<input type="text" name="status" id="status" value="" />
-											</div>
-
-											<div class="field third">
-												<label for="status">Status</label>
-												<input type="text" name="status" id="status" value="" />
-											</div>
-										</form>
-									</div>
-								</div>
-							</section>
-
-						<!-- Copyright -->
-							<div class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</div>
-					</div>
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/browserMqtt.js"></script>
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/main.js"></script>
-			<script src="assets/js/index.js"></script>
-			
-	</body>
 </html>
