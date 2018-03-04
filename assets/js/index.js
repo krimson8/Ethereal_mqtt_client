@@ -36,8 +36,15 @@ function connect()
 	// m_value = module.options[module.selectedIndex].text
 	IP = ip_show.value;
 	topic = topic_show.value;
-	
-	client = mqtt.connect(IP); 
+	client = mqtt.connect(IP);
+    /* IN CASE OF SECURITY LOGIN
+    client = mqtt.connect({
+        host: '140.116.82.42',
+        port: 9001,
+        username: 'xiongtest',
+        password: '123'
+    });
+    */ 
 	client.subscribe(topic);
 	
 	client.on("message", 
