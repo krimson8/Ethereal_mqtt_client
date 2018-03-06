@@ -1,3 +1,13 @@
+var usr = prompt("Please enter username:")
+while(usr == null || usr == "") {
+    usr = prompt("Error, please enter valid username:")
+}
+
+var pwd = prompt("Please enter password:")
+while(pwd == null || pwd == "") {
+    pwd = prompt("Error, please enter valid password:")
+}
+
 var ip_show = document.querySelector('#ip');
 var topic_show = document.querySelector('#topic');
 
@@ -36,15 +46,16 @@ function connect()
 	// m_value = module.options[module.selectedIndex].text
 	IP = ip_show.value;
 	topic = topic_show.value;
-	client = mqtt.connect(IP);
-    /* IN CASE OF SECURITY LOGIN
+	//client = mqtt.connect(IP);
+    //IN CASE OF SECURITY LOGIN
+    
     client = mqtt.connect({
         host: '140.116.82.42',
         port: 9001,
-        username: 'xiongtest',
-        password: '123'
+        username: usr,
+        password: pwd
     });
-    */ 
+     
 	client.subscribe(topic);
 	
 	client.on("message", 
